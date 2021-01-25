@@ -41,22 +41,15 @@ def xmlMake():
     refs = []
 
     csv_reader = csv.reader(codecs.open(var.get(), 'rU', 'utf-16'))
-    count = 0
+
     for row in csv_reader:
-        if count == 0:
+        if "-" in row[0]:
             dates.append(row[0])
-            amounts.append(float(row[6]))
-        if count == 1:
-            pass
-        if count == 2:
-            pass
-        if count == 3:
+        if row[1] == "New Ref":
             refs.append(row[2])
-        if count == 4:
-            pass
-        count += 1
-        if count == 5:
-            count = 0
+            amounts.append(float(row[4]))
+    
+    print(len(dates), len(refs), len(amounts))
     total = round(sum(amounts),2)
 
     tree = etree.parse(bundle_dir+"\\text.txt")
@@ -100,7 +93,7 @@ def xmlMake():
     doneLabel.grid(row = 9, column = 0, pady = (0,10))
 
 companyLabel = Label(window, text = "Select Company:")
-companyData=("TOPSTAR TRADING PTE LTD", "AL ANSAR FOOD PRODUCTS PTE LTD", "ONE OCEAN FOOD PTE LTD", "GRAND PACIFIC TRADING", "UNITED GLOBAL MARKETING PTE LTD", "WEI LEE POLYTHENE", "TOWSENLY FOOD ENTERPRISE")
+companyData=("TOPSTAR TRADING PTE LTD", "AL ANSAR FOOD PRODUCTS PTE LTD", "ONE OCEAN FOOD PTE LTD", "GRAND PACIFIC TRADING", "UNITED GLOBAL MARKETING PTE LTD", "WEI LEE POLYTHENE", "TOWSENLY FOOD ENTERPRISE", "HUP HENG POULTRY INDUSTRIES PTE LTD")
 cb = Combobox(window, values=companyData, width = 35)
 cb.current(0)
 
